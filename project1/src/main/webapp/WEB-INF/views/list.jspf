@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+var app = new Vue({
+  el: '#app',
+  data: {
+    list: [],
+    api_list: '/boardlist.json',
+      searchTypes: [
+         {name: "", text: "전체" },
+         {name: "title", text: "제목" },
+         {name: "cont", text: "내용" },
+      ],
+
+
+      },
+     created: function() {
+	    vm = this // 언제든 vm 사용가능하도록
+	    this.init();
+	    T.onChangeURL(function() {
+	        vm.search = T.queryStringToJSON()
+	        vm.init()
+	    })
+    }
+})
+
+</script>
