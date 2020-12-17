@@ -28,8 +28,15 @@ public class nController {
 	@Autowired
 	nService service;
 
+
 	@GetMapping
-	public String main(Model model) {
+	public String main() {
+		return "main";
+	}
+
+
+	@GetMapping("/list.do")
+	public String noticeList(Model model) {
 
 		List<Nvo> list = service.getList();
 		model.addAttribute("list",list);
@@ -38,7 +45,7 @@ public class nController {
 
 
 
-	//------------------------------------------------------------------
+
 
 	@GetMapping("/list_test")
 	public String Search(Model model,
