@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>∞‘Ω√∆«∏Ò∑œ</title>
+<title>Í≤åÏãúÌåêÎ™©Î°ù</title>
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
@@ -16,60 +16,69 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <!-- <script src="https://code.jquery.com/jquery-3.5.0.js"></script> -->
 <body>
-	<div>√— ∞«ºˆ : <span value="${ boards.getTotalElements }"></span></div>
-	 <div id="app" style='font-size:0.5em; '>
+	<div>Ï¥ù Í±¥Ïàò : <span value="${ Page.getTotalElements }"></span></div>
+	 	<div id="app" style='font-size:0.5em; '>
 	 		<form action="list" method="GET">
             <table class="fqa_tbl" id='lists' style='width:1000px; align=center;text-align:center; '>
 	            <tr style='text-align:left;font-size:2em'>
 	            <td><p style='margin:0 auto; font-size:2em;text-align:left;'>Notice</p></td>
 	            <td>
-	            <div class="flt_l">
+	            <div>
                       <select id="searchType1" name="searchType">
-                         <option value="01">¡¶∏Ò</option>
-                         <option value="02">¿€º∫¿⁄</option>
+                         <option value="01">Ï†úÎ™©</option>
+                         <option value="02">ÏûëÏÑ±Ïûê</option>
                       </select>
              	</div>
 	            	<input type=text name="keyWord" id="keyWord1" ></td>
-	            <td><input type=button name="goSearch" onclick="Search()" value="∞Àªˆ"></td>
+	            <td><input type=button name="goSearch" onclick="Search()" value="Í≤ÄÏÉâ"></td>
 	            </tr>
 	            <tr>
 	                <tr class=table_tr>
-	                <th class='fqa_tbl_title1' align=center style='width:50px'>π¯»£</th>
-	                <th style='width:100px'>¿€º∫¿⁄</th>
-	                <th style='width:1000px'>¡¶∏Ò</th>
-	                </tr>
-	            <c:forEach items="${list}" var="item" varStatus="status" begin="0" end="40" step="1" >
+	                <th class='fqa_tbl_title1' align=center style='width:50px'>Î≤àÌò∏</th>
+	                <th style='width:100px'>ÏûëÏÑ±Ïûê</th>
+	                <th style='width:1000px'>Ï†úÎ™©</th>
+	            </tr>
+	            <c:forEach items="${list}" var="item" varStatus="status" begin="0" end="20" step="1" >
 <!-- 	            <tr v-for="(item,idx) in list" :key=idx> -->
+				<tr>
 	                <td>${ status.index+1 }</td>
 	                <td>${ item.writer }</td>
 	                <td><a href="/detail/${item.idx}">${ item.title }</a></td>
 	            </tr>
 	            </c:forEach>
 	            <tr>
-	                <td style='text-align:right;'></td>
-	              <td style='align:right;font-size:2em'>
-	                  <c:if test="${startyes eq 1}">
-	                  <a  style='color:black;' href=list?pageNum=${back}">[¿Ã¿¸]</a>
-	                  </c:if>
-	                  <ul class=pageNum>
-	                  <c:forEach items='${num}' var='n'>
-	                <li><a href='list?pageNum=${n}' id="${n}">${n}</a></li>
-	                </c:forEach>
-	                </ul>
-	                <c:if test="${endno eq 1}">
-	                <a  style='color:black;' href="list?pageNum=${nexts}">[¥Ÿ¿Ω]</a>
-	               </c:if>
-	               </td>
-					</form>
-	                <td style='float:right; width:71px'>
-<!-- 	                <button @click="write">±€æ≤±‚</button> -->
- 						<a class=a href="write.do">±€æ≤±‚</a>
+		            <td style='float:right; width:71px'>
+	<!-- 	            <button @click="write">Í∏ÄÏì∞Í∏∞</button> -->
+						<a href="write.do">Í∏ÄÏì∞Í∏∞</a>
+						<div>
+				            <c:if test="${0 ne Page.totalPages}">
+				            <a onClick="goPaging(0)">Ï≤òÏùå</a>
+				            </c:if>
+				            <c:if test="${!Page.first}">
+				               <a onClick="goPaging(${Page.number-1})">Ïù¥Ï†Ñ</a>
+				            </c:if>
+				            <c:if test="${Page.totalPages >= 1 }">
+				            <c:forEach var="i" begin="0" end="${Page.totalPages-1}">
+				               <c:if test="${i eq Page.number}">
+				                  <a>${i+1}</a>
+				               </c:if>
+				               <c:if test="${i ne Page.number}">
+				                  <a onClick="goPaging(${i})" >${i+1}</a>
+				               </c:if>
+				            </c:forEach>
+				            </c:if>
+				            <c:if test="${!Page.last}">
+				               <a onClick="goPaging(${Page.number+1})">Îã§Ïùå</a>
+				            </c:if>
+				            <c:if test="${Page.totalPages >= 1 }">
+				               <a onClick="goPaging(${Page.totalPages-1})">ÎßàÏßÄÎßâ</a>
+				            </c:if>
+				        </div>
 	                </td>
-	            </tr>
-
+                </tr>
             </table>
+            </form>
         </div>
-
 
 <%-- /<%@ include file="/WEB-INF/views/list.jspf" %> --%>
 <script>
@@ -95,7 +104,7 @@ function Search(){
 
 
 //     if(keyWord == ''){
-//        alert("∞ÀªˆæÓ∏¶ ¿‘∑¬«ÿ¡÷ººø‰.");
+//        alert("Í≤ÄÏÉâÏñ¥Î•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî.");
 //        return false;
 //     }
 

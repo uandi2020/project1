@@ -30,6 +30,8 @@ public interface nService {
 
 	public List<Nvo> findByWriterContainingIgnoreCase(String keyWord);
 
+	public Page<Nvo> findAll(org.springframework.data.domain.Pageable pageable);
+
 
 
 

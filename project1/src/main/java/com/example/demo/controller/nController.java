@@ -2,13 +2,13 @@ package com.example.demo.controller;
 
 
 import java.io.File;
-import java.net.URI;
 import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,6 +49,7 @@ public class nController {
 
 	@GetMapping("/list.do")
 	public String Search(Model model,
+			Pageable pageable,
 			@RequestParam(value="keyWord") String keyWord,
 			@RequestParam(value="searchType") String searchType) throws Exception {
 
@@ -76,6 +77,11 @@ public class nController {
 
 
 		System.out.println("keWord"+keyWord);
+		  Page<Nvo> pageList = null;
+
+		  pageList = service.findAll(pageable);
+
+	      model.addAttribute("Page", pageList);
 
 
 
