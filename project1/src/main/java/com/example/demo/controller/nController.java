@@ -29,13 +29,13 @@ public class nController {
 	nService service;
 
 
-	@GetMapping
-	public String main() {
-		return "main";
-	}
+//	@GetMapping
+//	public String main() {
+//		return "main";
+//	}
 
 
-	@GetMapping("/list.do")
+	@GetMapping("/list")
 	public String noticeList(Model model) {
 
 		List<Nvo> list = service.getList();
@@ -47,7 +47,7 @@ public class nController {
 
 
 
-	@GetMapping("/list_test")
+	@GetMapping("/list.do")
 	public String Search(Model model,
 			@RequestParam(value="keyWord") String keyWord,
 			@RequestParam(value="searchType") String searchType) throws Exception {
@@ -57,12 +57,12 @@ public class nController {
 
 		switch (searchType) {
       case "01":
-//         eventPage = eventService.findByTitleContainingIgnoreCase(searchKeyWord , pageable);
+//         Page = Service.findByTitleContainingIgnoreCase(searchKeyWord , pageable);
     	  List<Nvo> title = service.findByTitleContainingIgnoreCase(keyWord);
     	  model.addAttribute("list", title);
          break;
       case "02":
-//         eventPage = eventService.findByEventContentsContainingIgnoreCase(searchKeyWord , pageable);
+//         Page = Service.findByEventContentsContainingIgnoreCase(searchKeyWord , pageable);
     	  List<Nvo> writer = service.findByWriterContainingIgnoreCase(keyWord);
     	  model.addAttribute("list", writer);
     	  break;
@@ -125,7 +125,7 @@ public class nController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/";
+		return "redirect:/list";
 	}
 
 
@@ -150,8 +150,9 @@ public class nController {
 
 	@RequestMapping("/update")
 	public String update(Nvo nvo) {
+		nvo.setWriter("이승미");
 		service.save(nvo);
-		return "redirect:/";
+		return "redirect:/list";
 	}
 
 //	@GetMapping

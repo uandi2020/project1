@@ -54,8 +54,8 @@ public class nServiceImpl implements nService {
 	@Override
 	public void update(Nvo nvo) {
 		// TODO Auto-generated method stub
-		ndao.findByIdx(nvo.getIdx());
-		ndao.save(nvo);
+		ndao.findByIdx(nvo.getIdx()); //아이디를 찾아와서
+		ndao.save(nvo);	// entity를 저장
 	}
 	//idx를 찾아서 데이터를 수정해줄것이기 때문에 entity를 매개변수로 받은것임
 

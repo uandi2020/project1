@@ -45,21 +45,21 @@
 	                <td><a href="/detail/${item.idx}">${ item.title }</a></td>
 	            </tr>
 	            </c:forEach>
-<!-- 	            <tr> -->
-<!-- 	                <td style='text-align:right;'></td> -->
-<!-- 	              <td style='align:right;font-size:2em'> -->
-<%-- 	                  <c:if test="${startyes eq 1}"> --%>
-<%-- 	                  <a  style='color:black;' href="notice_list?pageNum=${back}">[이전]</a> --%>
-<%-- 	                  </c:if> --%>
-<!-- 	                  <ul class=pageNum> -->
-<%-- 	                  <c:forEach items='${num}' var='n'> --%>
-<%-- 	                <li><a href='notice_list?pageNum=${n}' id="${n}">${n}</a></li> --%>
-<%-- 	                </c:forEach> --%>
-<!-- 	                </ul> -->
-<%-- 	                <c:if test="${endno eq 1}"> --%>
-<%-- 	                <a  style='color:black;' href="notice_list?pageNum=${nexts}">[다음]</a> --%>
-<%-- 	               </c:if> --%>
-<!-- 	               </td> -->
+	            <tr>
+	                <td style='text-align:right;'></td>
+	              <td style='align:right;font-size:2em'>
+	                  <c:if test="${startyes eq 1}">
+	                  <a  style='color:black;' href=list?pageNum=${back}">[이전]</a>
+	                  </c:if>
+	                  <ul class=pageNum>
+	                  <c:forEach items='${num}' var='n'>
+	                <li><a href='list?pageNum=${n}' id="${n}">${n}</a></li>
+	                </c:forEach>
+	                </ul>
+	                <c:if test="${endno eq 1}">
+	                <a  style='color:black;' href="list?pageNum=${nexts}">[다음]</a>
+	               </c:if>
+	               </td>
 					</form>
 	                <td style='float:right; width:71px'>
 <!-- 	                <button @click="write">글쓰기</button> -->
