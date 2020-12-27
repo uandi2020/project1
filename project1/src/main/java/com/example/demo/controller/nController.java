@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
@@ -20,7 +21,10 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.entity.Nvo;
+import com.example.demo.function.Paging;
 import com.example.demo.service.nService;
+
+
 
 @Controller
 public class nController {
@@ -29,23 +33,12 @@ public class nController {
 	nService service;
 
 
-//	@GetMapping
-//	public String main() {
-//		return "main";
-//	}
-
-
 	@GetMapping("/list")
 	public String noticeList(Model model) {
-
 		List<Nvo> list = service.getList();
 		model.addAttribute("list",list);
 		return "list";
 	}
-
-
-
-
 
 	@GetMapping("/list.do")
 	public String Search(Model model,
@@ -77,14 +70,6 @@ public class nController {
 
 
 		System.out.println("keWord"+keyWord);
-		  Page<Nvo> pageList = null;
-
-		  pageList = service.findAll(pageable);
-
-	      model.addAttribute("Page", pageList);
-
-
-
 
 		return "list";
 	}
@@ -92,25 +77,17 @@ public class nController {
 	@GetMapping("/write.do")
 	public String write() {
 		return "write";
-
 	}
-
-
-
-
 
 	@PostMapping("/write.do")
 	public String save(@RequestPart MultipartFile files, Nvo nvo) {
 		try {
 			Nvo file = new Nvo();
-
 			String sourceFileName = files.getOriginalFilename();
 	        		String sourceFileNameExtension = FilenameUtils.getExtension(sourceFileName).toLowerCase();
 	        		File destinationFile;
 	        		String destinationFileName;
 	        		String fileUrl = "D:/tmp/e4.17/src/main/resources/static/images/";
-
-
 
 	        		do {
 	            			destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + sourceFileNameExtension;
@@ -134,17 +111,11 @@ public class nController {
 		return "redirect:/list";
 	}
 
-
-
-
-
-
-
 //	@RequestMapping("/delete/{idx}")
 //	public String delete(@PathVariable Long idx, Model model) {
 //		Nvo nvo = service.findByIdx(idx);
 //		model.addAttribute("list", nvo);
-//		return "redirect:/index";
+//		return "redirect:/list";
 //	}
 
 	@RequestMapping("/detail/{idx}")
@@ -160,29 +131,6 @@ public class nController {
 		service.save(nvo);
 		return "redirect:/list";
 	}
-
-//	@GetMapping
-//	public String search(@RequestParam(value="keyword") String keyword, Model model) {
-//		List<Nvo> boardlist = service.findByTitleContainingIgnoreCase(keyword);
-//		model.addAttribute("boardlist", boardlist);
-//
-//		return "redirect:/";
-//	}
-
-//	@GetMapping("/list")
-//	public String list(Model model, @PageableDefault(size = 2) Pageable pageable) {
-//		Page<Nvo> boards = service.findAll(pageable);
-//		boards.getTotalElements();
-//
-//		int startPage = Math.max(0,  boards.getPageable().getPageNumber() -4);
-//		int endPage = Math.min(boards.getTotalPages(), boards.getPageable().getPageNumber() +4);
-//		model.addAttribute("startPage", startPage);
-//		model.addAttribute("endPage", endPage);
-//		model.addAttribute("boards", boards);
-//		return "/list";
-//	}
-
-
 
 
 }

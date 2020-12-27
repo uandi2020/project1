@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.entity.Nvo;
 
@@ -30,7 +31,10 @@ public interface nService {
 
 	public List<Nvo> findByWriterContainingIgnoreCase(String keyWord);
 
-	public Page<Nvo> findAll(org.springframework.data.domain.Pageable pageable);
+
+
+
+
 
 
 

@@ -20,11 +20,7 @@ public interface nDao extends JpaRepository<Nvo, Long> {
 	@Query
 	List<Nvo> findByContentsContainingIgnoreCaseOrTitleContainingIgnoreCase(String title, String contents);
 
-//	@Query
-//	Page<Nvo> findAll(Pageable pageable);
 
-//	@Query
-//	(value = "select * from n_vo" ,  nativeQuery=true)
 	@Query
 	public List<Nvo> findByTitleContainingIgnoreCase(String keyword);
 

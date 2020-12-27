@@ -4,12 +4,16 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.nDao;
 import com.example.demo.entity.Nvo;
+import com.example.demo.function.Paging;
 import com.example.demo.service.nService;
 
 
@@ -24,6 +28,27 @@ public class nServiceImpl implements nService {
 		// TODO Auto-generated method stub
 		return ndao.findAll();
 	}
+//
+//	@Override
+//	public ModelAndView getList(int total) {
+//		Sort sort = Sort.by(Direction.DESC,"idx");
+//		int size = 10;
+//		Pageable pageable = PageRequest.of(total-1, size, sort);
+//
+//		Page<Nvo> paging = ndao.findAll(pageable);
+//		List<Nvo> list = paging.getContent();
+//
+//		Paging p = new Paging();
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("list",list);z
+//		mv.addObject("page",p);
+//		return mv;
+//	}
+
+
+
+
+
 
 	@Override
 	public void save(Nvo nvo) {
@@ -74,32 +99,11 @@ public class nServiceImpl implements nService {
 
 
 
-
-
-	public Page<Nvo> findAll(Pageable pageable) {
-		// TODO Auto-generated method stub
-		return ndao.findAll(pageable);
-	}
-
 	@Override
 	public List<Nvo> findByWriterContainingIgnoreCase(String keyWord) {
 		// TODO Auto-generated method stub
 		return ndao.findByWriterContainingIgnoreCase(keyWord);
 	}
-
-
-
-
-
-//	@Override
-//	public Page<Nvo> findAll(
-//			org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable pageable) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-
-
-
 
 
 

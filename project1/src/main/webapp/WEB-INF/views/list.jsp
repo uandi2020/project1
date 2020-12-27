@@ -38,41 +38,67 @@
 	                <th style='width:100px'>작성자</th>
 	                <th style='width:1000px'>제목</th>
 	            </tr>
-	            <c:forEach items="${list}" var="item" varStatus="status" begin="0" end="20" step="1" >
-<!-- 	            <tr v-for="(item,idx) in list" :key=idx> -->
-				<tr>
-	                <td>${ status.index+1 }</td>
-	                <td>${ item.writer }</td>
-	                <td><a href="/detail/${item.idx}">${ item.title }</a></td>
-	            </tr>
-	            </c:forEach>
+	             <c:forEach items="${list}" var="dao" varStatus="status" begin="0" end="20" step="1" >
+                        <tr >
+                            <td align=center>${status.index+1}</td>
+                            <td>${dao.writer}</td>
+                            <td><a style='color:black' href="/detail/${dao.idx}">${dao.title}</a></td>
+                        </tr>
+                        </c:forEach>
+<%-- 	            <c:forEach items="${list}" var="item" varStatus="status" begin="0" end="20" step="1" > --%>
+<!-- <!-- 	            <tr v-for="(item,idx) in list" :key=idx> --> -->
+<!-- 				<tr> -->
+<%-- 	                <td>${ status.index+1 }</td> --%>
+<%-- 	                <td>${ item.writer }</td> --%>
+<%-- 	                <td><a href="/detail/${item.idx}">${ item.title }</a></td> --%>
+<!-- 	            </tr> -->
+<%-- 	            </c:forEach> --%>
+
+
 	            <tr>
 		            <td style='float:right; width:71px'>
 	<!-- 	            <button @click="write">글쓰기</button> -->
 						<a href="write.do">글쓰기</a>
 						<div>
-				            <c:if test="${0 ne Page.totalPages}">
-				            <a onClick="goPaging(0)">처음</a>
-				            </c:if>
-				            <c:if test="${!Page.first}">
-				               <a onClick="goPaging(${Page.number-1})">이전</a>
-				            </c:if>
-				            <c:if test="${Page.totalPages >= 1 }">
-				            <c:forEach var="i" begin="0" end="${Page.totalPages-1}">
-				               <c:if test="${i eq Page.number}">
-				                  <a>${i+1}</a>
-				               </c:if>
-				               <c:if test="${i ne Page.number}">
-				                  <a onClick="goPaging(${i})" >${i+1}</a>
-				               </c:if>
-				            </c:forEach>
-				            </c:if>
-				            <c:if test="${!Page.last}">
-				               <a onClick="goPaging(${Page.number+1})">다음</a>
-				            </c:if>
-				            <c:if test="${Page.totalPages >= 1 }">
-				               <a onClick="goPaging(${Page.totalPages-1})">마지막</a>
-				            </c:if>
+
+ 				<tr >
+	                <td style='text-align:right;'></td>
+		            <td style='align:right;font-size:2em'>
+	                <c:if test="${startyes eq 1}">
+	                <a  style='color:black;' href="list?pageNum=${back}">[이전]</a>
+	                </c:if>
+	                <ul class=pageNum>
+	             	<c:forEach items='${num}' var='n'>
+	                	<li><a href='list?pageNum=${n}' id="${n}">${n}</a></li>
+	                </c:forEach>
+               		 </ul>
+                	<c:if test="${endno eq 1}">
+               			 <a  style='color:black;' href="list?pageNum=${nexts}">[다음]</a>
+              		 </c:if>
+              		 </td>
+         	     </tr>
+<%-- 				            <c:if test="${0 ne Page.totalPages}"> --%>
+<!-- 				            <a onClick="goPaging(0)">처음</a> -->
+<%-- 				            </c:if> --%>
+<%-- 				            <c:if test="${!Page.first}"> --%>
+<%-- 				               <a onClick="goPaging(${Page.number-1})">이전</a> --%>
+<%-- 				            </c:if> --%>
+<%-- 				            <c:if test="${Page.totalPages >= 1 }"> --%>
+<%-- 				            <c:forEach var="i" begin="0" end="${Page.totalPages-1}"> --%>
+<%-- 				               <c:if test="${i eq Page.number}"> --%>
+<%-- 				                  <a>${i+1}</a> --%>
+<%-- 				               </c:if> --%>
+<%-- 				               <c:if test="${i ne Page.number}"> --%>
+<%-- 				                  <a onClick="goPaging(${i})" >${i+1}</a> --%>
+<%-- 				               </c:if> --%>
+<%-- 				            </c:forEach> --%>
+<%-- 				            </c:if> --%>
+<%-- 				            <c:if test="${!Page.last}"> --%>
+<%-- 				               <a onClick="goPaging(${Page.number+1})">다음</a> --%>
+<%-- 				            </c:if> --%>
+<%-- 				            <c:if test="${Page.totalPages >= 1 }"> --%>
+<%-- 				               <a onClick="goPaging(${Page.totalPages-1})">마지막</a> --%>
+<%-- 				            </c:if> --%>
 				        </div>
 	                </td>
                 </tr>
